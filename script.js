@@ -1,16 +1,28 @@
-function wow(event) {
-	event.preventDefault();
-	var a = document.querySelector("input").value
-    var r = a.split(",");
+function minCostToFormRope(a) {
+  a.preventDefault();
+  var inputElement = document.querySelector("input").value;
+  var arr = inputElement.split(",");
+  arr.sort(function (a, b) {
+    return a - b;
+  });
 
-var sum =0;
-    while(r.length>1){
-    r.sort( function (a , b ){ return a-b} );
-    var inssum =    Number(r[0])+Number(r[1]);
-    sum = sum + inssum
-    console.log(r);
-    r.splice(0 , 2 , inssum)
-    }
+  // we need to access first two element
+  // add them & store in a variable res
 
-	document.querySelector("#result").innerText = sum;
+  // add the res in array
+  // increment cost by res
+  var cost = 0;
+  while (arr.length > 1) {
+    var res = Number(arr[0]) + Number(arr[1]);
+    arr.splice(0, 2);
+
+    arr.push(res);
+    cost += res;
+
+    arr.sort(function (a, b) {
+      return a - b;
+    });
+  }
+
+  document.getElementById("result").textContent = cost;
 }
